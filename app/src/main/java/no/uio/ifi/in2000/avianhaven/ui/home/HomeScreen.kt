@@ -28,6 +28,8 @@ fun HomeScreen(
     navController: NavController)
 {
     var input by rememberSaveable { mutableStateOf("") }
+    //Ny
+    Text(text = "TEST")
     Column(
         modifier = Modifier
             .fillMaxWidth()
