@@ -19,12 +19,12 @@ fun InfoScreen(
 
     Column {
         AsyncImage(
-            model = birdPageUiState.currentBird?.images?.get(0),
+            model = birdPageUiState.currentEntity?.images?.get(0),
             contentDescription = "Bird picture",
         )
-        Text(text = "Name: ${birdPageUiState.currentBird?.name}")
-        Text(text = "Latin name: ${birdPageUiState.currentBird?.sciName}")
-        Text(text = "Family: ${birdPageUiState.currentBird?.family}")
+        Text(text = "Name: ${birdPageUiState.currentEntity?.name}")
+        Text(text = "Latin name: ${birdPageUiState.currentEntity?.latinName}")
+        Text(text = "Family: ${birdPageUiState.currentEntity?.family}")
         Text(text = "Features(Colors, size..:)")
         Text(text = "Behaviour(funfacts: )")
         Text(text = "Life expectancy: ")

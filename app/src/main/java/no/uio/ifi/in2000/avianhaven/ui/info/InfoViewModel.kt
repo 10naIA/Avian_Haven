@@ -7,12 +7,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import no.uio.ifi.in2000.avianhaven.data.BirdDataSource
 import no.uio.ifi.in2000.avianhaven.data.BirdRepository
 import no.uio.ifi.in2000.avianhaven.data.Entity
 
 data class InfoUIState(
-    val currentBird: Entity? = null,
+    val currentEntity: Entity? = null,
     val currentName: String? = null,
 )
 
@@ -39,7 +38,7 @@ class InfoViewModel: ViewModel() {
             _infoUiState.update {
                 InfoUIState(
                     currentName = chosenName,
-                    currentBird = birdRepository.getChosenBird(chosenName)
+                    currentEntity = birdRepository.getChosenBird(chosenName)
                 )
             }
         }
