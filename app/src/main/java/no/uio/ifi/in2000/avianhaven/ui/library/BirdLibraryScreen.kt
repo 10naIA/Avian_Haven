@@ -39,13 +39,13 @@ fun BirdLibraryScreen(
         modifier = Modifier
             .fillMaxSize()
     ) {
-        items(libraryUiState.currentBirdList.size) {
-            val item = libraryUiState.currentBirdList[it]
+        items(libraryUiState.currentEntityList.size) {
+            val item = libraryUiState.currentEntityList[it]
             BirdCard(
                 entity = item,
                 onClick = {
-                    birdInfoViewModel.updateChosenBird(item.sciName)
-                    navController.navigate("infoscreen/${item.sciName}")
+                    birdInfoViewModel.updateChosenBird(item.latinName)
+                    navController.navigate("infoscreen/${item.latinName}")
                 }
             )
         }
@@ -93,8 +93,9 @@ fun BirdCard(
             Text(
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally),
-                text = "Latin name: ${entity.sciName}"
+                text = "Latin name: ${entity.latinName}"
             )
+            Text(text = "Test")
             Spacer(
                 modifier = Modifier
                     .padding(10.dp)

@@ -1,5 +1,8 @@
 package no.uio.ifi.in2000.avianhaven.data
 
+/*
+import com.google.gson.annotations.SerializedName
+
 data class BirdLibraryDTO(
     val entities: List<Entity>
 )
@@ -13,8 +16,9 @@ data class Entity(
     val name: String,
     val order: String,
     val region: List<String>,
-    val sciName: String,
+    @SerializedName("SciName")
+    val latinName: String,
     val status: String,
     val wingspanMax: Double,
     val wingspanMin: Double
-)
+)*/
