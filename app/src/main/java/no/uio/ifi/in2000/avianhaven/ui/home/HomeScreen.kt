@@ -29,7 +29,6 @@ fun HomeScreen(
 {
     var input by rememberSaveable { mutableStateOf("") }
     //Ny
-    Text(text = "TEST")
     Column(
         modifier = Modifier
             .fillMaxWidth()

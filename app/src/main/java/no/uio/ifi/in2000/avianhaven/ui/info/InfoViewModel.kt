@@ -25,12 +25,7 @@ class InfoViewModel: ViewModel() {
 
     fun updateChosenBird(name: String) {
         chosenName = name
-    }
-
-    init {
-        viewModelScope.launch {
-            updateState()
-        }
+        updateState()
     }
 
     private fun updateState() {

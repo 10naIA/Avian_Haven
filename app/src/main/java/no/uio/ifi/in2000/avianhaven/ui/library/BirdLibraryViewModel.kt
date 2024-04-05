@@ -9,8 +9,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import no.uio.ifi.in2000.avianhaven.data.Entity
-import no.uio.ifi.in2000.avianhaven.data.LocationForecastDataSource
-import no.uio.ifi.in2000.avianhaven.data.LocationForecastRepository
 
 
 data class BirdUIState(
@@ -23,16 +21,13 @@ class BirdLibraryViewModel: ViewModel() {
     private val _birdUiState = MutableStateFlow(BirdUIState())
     val birdUiState: StateFlow<BirdUIState> = _birdUiState.asStateFlow()
 
-    private var dataFetched: Boolean = false
-
     init {
         updateState()
     }
 
     private fun updateState() {
         viewModelScope.launch {
-            if(!dataFetched) {
-                dataFetched = true
+            if(!birdRepository.getStatus()) {
                 birdRepository.storeDeserializedData()
             }
             _birdUiState.update {

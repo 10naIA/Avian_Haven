@@ -9,6 +9,10 @@ object BirdRepository {
         entityData = storedData.entities
     }
 
+    fun getStatus(): Boolean {
+        return entityData.isNotEmpty()
+    }
+
     fun getStoredData(): List<Entity> {
         return entityData
     }
