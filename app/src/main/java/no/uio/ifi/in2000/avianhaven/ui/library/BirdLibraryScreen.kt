@@ -56,11 +56,8 @@ fun BirdLibraryScreen(
 fun BirdCard(
     entity: Entity,
     onClick: () -> Unit,
-    birdLibraryViewModel: BirdLibraryViewModel = viewModel()
-
 ) {
     val cardColor = colorResource(id = R.color.light_blue)
-    val libraryUiState by birdLibraryViewModel.birdUiState.collectAsState()
 
     Card(
         modifier = Modifier
@@ -95,7 +92,6 @@ fun BirdCard(
                     .align(Alignment.CenterHorizontally),
                 text = "Latin name: ${entity.latinName}"
             )
-            Text(text = "Test")
             Spacer(
                 modifier = Modifier
                     .padding(10.dp)
