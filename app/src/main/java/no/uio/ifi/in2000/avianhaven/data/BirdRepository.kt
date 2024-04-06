@@ -1,11 +1,11 @@
 package no.uio.ifi.in2000.avianhaven.data
 
 object BirdRepository {
-    private val birdDataSource = BirdDataSource
+    private val birdDatasource = BirdDatasource
     private var entityData: List<Entity> = listOf()
 
     suspend fun storeDeserializedData() {
-        val storedData: BirdDTO = birdDataSource.fetchBirdData()
+        val storedData: BirdDTO = birdDatasource.fetchBirdData()
         entityData = storedData.entities
     }
 

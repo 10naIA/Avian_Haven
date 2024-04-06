@@ -1,5 +1,7 @@
 package no.uio.ifi.in2000.avianhaven.ui.library
 
+import android.content.Context
+import android.media.MediaPlayer
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -8,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
@@ -18,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -39,6 +43,15 @@ fun BirdLibraryScreen(
         modifier = Modifier
             .fillMaxSize()
     ) {
+        item {
+            val context = LocalContext.current
+            val mediaPlayer = MediaPlayer.create(context, R.raw.xl143610_black_bellied_whistling_duck_dendrocygna_autumnalis)
+            Button(
+                onClick = {mediaPlayer.start()}
+            ) {
+                Text(text = "Chirp")
+            }
+        }
         items(libraryUiState.currentEntityList.size) {
             val item = libraryUiState.currentEntityList[it]
             BirdCard(
@@ -50,6 +63,14 @@ fun BirdLibraryScreen(
             )
         }
     }
+}
+
+fun playSound(context: Context) {
+    val mediaPlayer = MediaPlayer.create(
+        context,
+        R.raw.xl143610_black_bellied_whistling_duck_dendrocygna_autumnalis
+    )
+    mediaPlayer.start()
 }
 
 @Composable
@@ -92,6 +113,7 @@ fun BirdCard(
                     .align(Alignment.CenterHorizontally),
                 text = "Latin name: ${entity.latinName}"
             )
+            Text(text = "id: ${entity.id}")
             Spacer(
                 modifier = Modifier
                     .padding(10.dp)

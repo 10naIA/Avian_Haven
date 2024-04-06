@@ -1,13 +1,12 @@
 package no.uio.ifi.in2000.avianhaven.ui.navigation
 
-import no.uio.ifi.in2000.avianhaven.ui.library.BirdLibraryScreen
 import no.uio.ifi.in2000.avianhaven.ui.home.HomeScreen
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import no.uio.ifi.in2000.avianhaven.ui.info.InfoScreen
+import no.uio.ifi.in2000.avianhaven.ui.library.BirdLibraryScreen
 
 /*sealed class Screen(val route: String) {
     data object HomeScreen: Screen("homeScreen")
