@@ -1,5 +1,7 @@
 package no.uio.ifi.in2000.avianhaven
 
+import android.content.Context
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
