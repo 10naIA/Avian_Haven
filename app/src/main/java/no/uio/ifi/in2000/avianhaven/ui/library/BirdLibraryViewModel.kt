@@ -14,12 +14,10 @@ import no.uio.ifi.in2000.avianhaven.data.SoundRepository
 
 data class BirdUIState(
     val currentEntityList: List<Entity> = listOf(),
-    val sound: String? = null
     )
 
 class BirdLibraryViewModel: ViewModel() {
     private val birdRepository: BirdRepository = BirdRepository
-    private val soundRepository: SoundRepository = SoundRepository
 
     private val _birdUiState = MutableStateFlow(BirdUIState())
     val birdUiState: StateFlow<BirdUIState> = _birdUiState.asStateFlow()
@@ -36,7 +34,6 @@ class BirdLibraryViewModel: ViewModel() {
             _birdUiState.update {
                 BirdUIState(
                     currentEntityList = birdRepository.getStoredData(),
-                    sound = soundRepository.getSound()
                 )
             }
         }
