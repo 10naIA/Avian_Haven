@@ -9,14 +9,17 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import no.uio.ifi.in2000.avianhaven.data.BirdRepository
 import no.uio.ifi.in2000.avianhaven.data.Entity
+import no.uio.ifi.in2000.avianhaven.data.SoundRepository
 
 data class InfoUIState(
     val currentEntity: Entity? = null,
-    val currentName: String? = null,
+    val sound: String? = null
 )
 
 class InfoViewModel: ViewModel() {
     private val birdRepository: BirdRepository = BirdRepository
+    private val soundRepository: SoundRepository = SoundRepository
+
 
     private val _infoUiState = MutableStateFlow(InfoUIState())
     val infoUiState: StateFlow<InfoUIState> = _infoUiState.asStateFlow()
@@ -32,8 +35,8 @@ class InfoViewModel: ViewModel() {
         viewModelScope.launch {
             _infoUiState.update {
                 InfoUIState(
-                    currentName = chosenName,
-                    currentEntity = birdRepository.getChosenBird(chosenName)
+                    currentEntity = birdRepository.getChosenBird(chosenName),
+                    sound = soundRepository.getSound()
                 )
             }
         }
