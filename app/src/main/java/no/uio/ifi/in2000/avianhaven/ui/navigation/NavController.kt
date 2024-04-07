@@ -27,11 +27,11 @@ fun NavController() {
         composable("birdLibraryScreen") {
             BirdLibraryScreen(navController)
         }
-        composable("infoScreen/{sciName}") {backStackEntry ->
-            backStackEntry.arguments?.getString("sciName")?.let {
+        composable("infoScreen/{id}") {backStackEntry ->
+            backStackEntry.arguments?.getString("id")?.let {
                 InfoScreen(
                     navController,
-                    sciName = it
+                    id = it.toInt()
                 )
             }
         }

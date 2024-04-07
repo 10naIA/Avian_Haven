@@ -68,7 +68,7 @@ fun BirdLibraryScreen(
             BirdCard(
                 entity = item,
                 onClick = {
-                    navController.navigate("infoscreen/${item.latinName}")
+                    navController.navigate("infoscreen/${item.id}")
                 }
             )
         }
@@ -127,7 +127,6 @@ fun BirdCard(
                         fontStyle = FontStyle.Italic
                     )
                 }
-                Text(text = "id: ${entity.id}")
                 Spacer(
                     modifier = Modifier
                         .padding(10.dp)

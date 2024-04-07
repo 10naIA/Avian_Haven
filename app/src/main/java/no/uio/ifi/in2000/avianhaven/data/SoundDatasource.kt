@@ -23,8 +23,8 @@ object SoundDatasource {
             gson{}
         }
     }
-    suspend fun fetchSound(): SoundDTO {
-        val response = client.get("https://nuthatch.lastelm.software/birds/1")
+    suspend fun fetchSound(id: Int): SoundDTO {
+        val response = client.get("https://nuthatch.lastelm.software/birds/$id")
         return response.body<SoundDTO>()
     }
 }

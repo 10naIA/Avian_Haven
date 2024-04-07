@@ -24,10 +24,15 @@ class InfoViewModel: ViewModel() {
     private val _infoUiState = MutableStateFlow(InfoUIState())
     val infoUiState: StateFlow<InfoUIState> = _infoUiState.asStateFlow()
 
-    private var chosenName: String = ""
+/*    private var chosenName: String = ""
 
     fun updateChosenBird(name: String) {
         chosenName = name
+        updateState()
+    }*/
+    private var chosenId: Int = 0
+    fun updateChosenBird(id: Int) {
+        chosenId = id
         updateState()
     }
 
@@ -35,8 +40,8 @@ class InfoViewModel: ViewModel() {
         viewModelScope.launch {
             _infoUiState.update {
                 InfoUIState(
-                    currentEntity = birdRepository.getChosenBird(chosenName),
-                    sound = soundRepository.getSound()
+                    currentEntity = birdRepository.getChosenBird(chosenId),
+                    sound = soundRepository.getSound(chosenId)
                 )
             }
         }

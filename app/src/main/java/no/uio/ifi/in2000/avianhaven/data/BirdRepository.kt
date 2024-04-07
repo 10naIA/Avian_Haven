@@ -17,8 +17,11 @@ object BirdRepository {
         return entityData
     }
 
-    fun getChosenBird(chosenName: String): Entity? {
+/*    fun getChosenBird(chosenName: String): Entity? {
         return entityData.find { it.latinName == chosenName }
+    }*/
+    fun getChosenBird(chosenId: Int): Entity? {
+        return entityData.find {it.id == chosenId}
     }
 }
 
