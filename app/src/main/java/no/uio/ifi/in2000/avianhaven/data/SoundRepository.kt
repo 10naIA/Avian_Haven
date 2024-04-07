@@ -2,10 +2,10 @@ package no.uio.ifi.in2000.avianhaven.data
 
 object SoundRepository {
     private val soundDataSource: SoundDatasource = SoundDatasource
-    private var foundSound: SoundDTO? = null
+    private var birdData: SoundDTO? = null
 
-    suspend fun getSound(): String? {
-        foundSound = soundDataSource.fetchSound()
-        return foundSound?.recordings?.firstOrNull()?.file
+    suspend fun getSound(id: Int): String? {
+        birdData = soundDataSource.fetchSound(id)
+        return birdData?.recordings?.firstOrNull()?.file
     }
 }

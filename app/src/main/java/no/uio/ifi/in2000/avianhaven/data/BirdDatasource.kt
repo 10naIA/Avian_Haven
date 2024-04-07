@@ -23,11 +23,8 @@ object BirdDatasource {
             gson{}
         }
     }
-    private var apiCallCounter = 0
     suspend fun fetchBirdData(): BirdDTO {
-        val response = client.get("https://nuthatch.lastelm.software/v2/birds?pageSize=50&hasImg=true&operator=AND")
-        apiCallCounter ++
-        println("Nr of API calls: $apiCallCounter")
+        val response = client.get("https://nuthatch.lastelm.software/v2/birds?page=1&pageSize=80&region=Western%20Europe&hasImg=true")
         return response.body<BirdDTO>()
     }
 }

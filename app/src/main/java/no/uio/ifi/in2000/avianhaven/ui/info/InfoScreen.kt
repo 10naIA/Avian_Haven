@@ -1,5 +1,6 @@
 package no.uio.ifi.in2000.avianhaven.ui.info
 
+import android.media.AudioAttributes
 import android.media.MediaPlayer
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
@@ -7,14 +8,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -25,8 +22,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
@@ -40,10 +35,10 @@ import no.uio.ifi.in2000.avianhaven.ui.theme.MidnightBlue
 @Composable
 fun InfoScreen(
     navController: NavController,
-    sciName: String,
+    id: Int,
     birdInfoViewModel: InfoViewModel = viewModel(),
     ) {
-    birdInfoViewModel.updateChosenBird(sciName)
+    birdInfoViewModel.updateChosenBird(id)
     val birdPageUiState by birdInfoViewModel.infoUiState.collectAsState()
 
     LazyColumn(
@@ -74,25 +69,36 @@ fun InfoScreen(
                         .size(400.dp)
                         .padding(10.dp)
                 )
-                val context = LocalContext.current
-                val mediaPlayer = MediaPlayer.create(
-                    context,
-                    R.raw.xl143610_black_bellied_whistling_duck_dendrocygna_autumnalis
-                )
-                IconButton(
-                    onClick = { mediaPlayer.start() },
-                    modifier = Modifier
-                        .align(Alignment.End),
-                    content = {
-                        Icon(
-                            painter = painterResource(id = R.drawable.baseline_music_note_24),
-                            contentDescription = "Music note",
-                            tint = Color.White,
-                            modifier = Modifier
-                                .size(43.dp)
-                        )
-                    }
-                )
+                val audioURL = birdPageUiState.sound
+                val mediaPlayer = MediaPlayer()
+                try {
+                    val audioAttributes = AudioAttributes.Builder()
+                        .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                        .setUsage(AudioAttributes.USAGE_MEDIA)
+                        .build()
+                    mediaPlayer.setAudioAttributes(audioAttributes)
+                    mediaPlayer.setDataSource(audioURL)
+                    mediaPlayer.prepare()
+                }
+                catch(e: Exception) {
+                    e.printStackTrace()
+                }
+                if(audioURL != null) {
+                    IconButton(
+                        onClick = { mediaPlayer.start() },
+                        modifier = Modifier
+                            .align(Alignment.End),
+                        content = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.baseline_music_note_24),
+                                contentDescription = "Music note",
+                                tint = Color.White,
+                                modifier = Modifier
+                                    .size(43.dp)
+                            )
+                        }
+                    )
+                }
                 Text(text = "Name: ${birdPageUiState.currentEntity?.name}")
                 Row {
                     Text(text = "Latin name: ")
