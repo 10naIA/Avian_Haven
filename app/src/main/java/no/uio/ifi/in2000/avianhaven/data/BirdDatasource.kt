@@ -7,16 +7,14 @@ import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.get
 import io.ktor.client.request.headers
 import io.ktor.serialization.gson.gson
+import no.uio.ifi.in2000.avianhaven.BuildConfig
 
 object BirdDatasource {
     private val client = HttpClient {
-/*        defaultRequest {
-            headers.appendIfNameAbsent("api-key", "1ccc4b54-68af-4d79-9844-e2b93704ebff")
-        }*/
         defaultRequest {
             headers {
-                append("User-Agent","Avian Haven/1.0 (Contact: Tina A)")
-                append("api-key", "1ccc4b54-68af-4d79-9844-e2b93704ebff")
+                append("User-Agent", BuildConfig.USER_AGENT)
+                append("api-key", BuildConfig.API_KEY)
             }
         }
         install(ContentNegotiation) {
